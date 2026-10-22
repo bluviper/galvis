@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:background="#050608">
+
+    <!-- Full-Bleed Dynamic Ambient Glow Layer -->
+    <ImageView
+        android:id="@+id/ivAmbientGlow"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:alpha="0.55"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Main Content Container with Safe TV Margins -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingStart="48dp"
+        android:paddingEnd="48dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="24dp">
+
+        <!-- Top-Left: Greeting & CleanYourTV Header Clock -->
+        <LinearLayout
+            android:id="@+id/headerLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- All-Caps Tracked Greeting (GOOD EVENING / GOOD MORNING) -->
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GOOD EVENING"
+                android:textColor="#8E929B"
+                android:textSize="11sp"
+                android:letterSpacing="0.14"
+                android:fontFamily="sans-serif-medium" />
+
+            <!-- Time + Divider + Date Row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5:35"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="36sp"
+                    android:fontFamily="sans-serif-light" />
+
+                <TextView
+                    android:id="@+id/tvAmPm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="13sp"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginStart="4dp" />
+
+                <TextView
+                    android:id="@+id/tvDivider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="|"
+                    android:textColor="#33FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="14dp" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MONDAY 19 OCTOBER"
+                    android:textColor="#8E929B"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.12"
+                    android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Top-Right: Three Frosted Pill Buttons (Inputs, Wi-Fi, Settings) -->
+        <LinearLayout
+            android:id="@+id/headerActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 1. Inputs Pill Button -->
+            <TextView
+                android:id="@+id/btnInputs"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="Inputs"
+                android:textColor="@color/pill_text_color"
+                android:drawableTint="@color/pill_text_color"
+                android:drawableTintMode="src_in"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:drawableStart="@drawable/ic_inputs"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:background="@drawable/bg_glass_pill"
+                android:layout_marginEnd="10dp" />
+
+            <!-- 2. Network (Wi-Fi / Ethernet) Pill Button -->
+            <TextView
+                android:id="@+id/btnNetwork"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="Wi-Fi"
+                android:textColor="@color/pill_text_color"
+                android:drawableTint="@color/pill_text_color"
+                android:drawableTintMode="src_in"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:drawableStart="@drawable/ic_wifi"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:background="@drawable/bg_glass_pill"
+                android:layout_marginEnd="10dp" />
+
+            <!-- 3. Settings Pill Button -->
+            <TextView
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="Settings"
+                android:textColor="@color/pill_text_color"
+                android:drawableTint="@color/pill_text_color"
+                android:drawableTintMode="src_in"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium"
+                android:drawableStart="@drawable/ic_settings"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center"
+                android:focusable="true"
+                android:background="@drawable/bg_glass_pill" />
+        </LinearLayout>
+
+        <!-- Top Shelf App Title (Generous Breathing Room, Bold, Clean) -->
+        <TextView
+            android:id="@+id/tvFocusedTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="YouTube"
+            android:textColor="#FFFFFFFF"
+            android:textSize="38sp"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="52dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLeft" />
+
+        <!-- Frosted Rounded Dock Band (Apple TV Shelf: Wraps 4 Favorites snugly) -->
+        <FrameLayout
+            android:id="@+id/dockBand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_dock_band"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFocusedTitle">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:nextFocusUp="@id/btnSettings"
+                android:nextFocusDown="@id/rvAllApps" />
+        </FrameLayout>
+
+        <!-- All Applications Grid (Scrollable Lower Row) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAllApps"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="24dp"
+            android:layout_marginTop="20dp"
+            android:nextFocusUp="@id/rvDock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dockBand"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

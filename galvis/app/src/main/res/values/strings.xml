@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GalVis</string>
+    <string name="dock_title">Favorites</string>
+    <string name="all_apps_title">All Applications</string>
+    <string name="settings_title">Settings</string>
+    <string name="inputs_title">Inputs</string>
+</resources>

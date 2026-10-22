@@ -1,0 +1,30 @@
+# Android & Gradle Build Artifacts
+.gradle/
+**/build/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Local Android SDK configuration
+local.properties
+**/local.properties
+
+# Kotlin & IDE
+.kotlin/
+.idea/
+*.iml
+.gradle/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# OS / Temp files
+Thumbs.db
+.DS_Store
+*.tmp
+*.log
+galvis_live*.png
+galvis_screen*.png
+screen_updated*.png
+current_screen.png

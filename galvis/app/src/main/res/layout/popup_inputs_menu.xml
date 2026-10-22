@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/inputsMenuContainer"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dp"
+    android:background="@drawable/bg_inputs_popup"
+    android:elevation="16dp"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- HDMI 1 -->
+    <LinearLayout
+        android:id="@+id/menuItemHdmi1"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="2dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_hdmi"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="HDMI 1"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <!-- HDMI 2 (Connected) -->
+    <LinearLayout
+        android:id="@+id/menuItemHdmi2"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="2dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_hdmi"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HDMI 2"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="● Connected"
+            android:textColor="@color/inputs_item_status_color"
+            android:duplicateParentState="true"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <!-- HDMI 3 -->
+    <LinearLayout
+        android:id="@+id/menuItemHdmi3"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="2dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_hdmi"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="HDMI 3"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <!-- HDMI PlayStation 5 (Connected) -->
+    <LinearLayout
+        android:id="@+id/menuItemHdmiPs5"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="4dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_hdmi"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HDMI PlayStation 5"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="● Connected"
+            android:textColor="@color/inputs_item_status_color"
+            android:duplicateParentState="true"
+            android:textSize="11sp"
+            android:fontFamily="sans-serif" />
+    </LinearLayout>
+
+    <!-- Subtle Divider Line -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1FFFFFFF"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- AV -->
+    <LinearLayout
+        android:id="@+id/menuItemAv"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_marginBottom="2dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_av"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AV"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <!-- Live TV -->
+    <LinearLayout
+        android:id="@+id/menuItemLiveTv"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/bg_inputs_item_selector"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_input_tv"
+            android:tint="@color/inputs_item_text_color"
+            android:duplicateParentState="true" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Live TV"
+            android:textColor="@color/inputs_item_text_color"
+            android:duplicateParentState="true"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+</LinearLayout>

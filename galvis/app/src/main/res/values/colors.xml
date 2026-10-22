@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- tvOS Dark Charcoal Theme Palette -->
+    <color name="bg_ambient">#0D0E12</color>
+    <color name="bg_surface">#181A20</color>
+    <color name="bg_surface_elevated">#22252E</color>
+    <color name="bg_tile_normal">#1D2027</color>
+    
+    <!-- Focus States (Apple TV Style Subtle Glow) -->
+    <color name="tile_focus_stroke">#FFFFFFFF</color>
+    <color name="tile_focus_glow">#33FFFFFF</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#F4F5F7</color>
+    <color name="text_secondary">#8E93A0</color>
+    <color name="text_muted">#585C66</color>
+
+    <!-- Accents -->
+    <color name="accent_blue">#0A84FF</color>
+</resources>
