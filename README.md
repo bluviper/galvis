@@ -6,9 +6,9 @@
 
 ## Visual Showcase
 
-| GALVis™ Signature Hybrid Theme | Anchored Inputs Flyout Menu |
-|:---:|:---:|
-| ![GALVis Mashup](docs/images/galvis_mashup.png) | ![Inputs Flyout](docs/images/inputs_menu.png) |
+| Home Screen & 6-Column Dock | Wallpaper Switcher Flydown | Inputs & Connectivity Flydown |
+|:---:|:---:|:---:|
+| ![Home Screen](docs/images/home_screen.png) | ![Wallpaper Flydown](docs/images/wallpaper_flydown.png) | ![Inputs Flydown](docs/images/inputs_flydown.png) |
 
 ---
 

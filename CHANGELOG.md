@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.5.0] - 2026-10-23
+
+### Added
+- **Upper-Right Wallpaper Switcher Button & Frosted Flydown Menu**:
+  - Added dedicated frosted icon button (`btnWallpaper`) using vector `ic_picture`.
+  - Dropdown options:
+    - **Theme Default**: Restores the signature Ruska Finnish Lake background.
+    - **Next Carousel Image**: Cycles to the next wallpaper instantly with smooth transition.
+    - **USB Flash Drive / Custom Storage**: Scans connected USB drives and `/storage/*` to pick custom wallpapers.
+    - **None (Pure Pitch Black)**: Turns off wallpapers for pure pitch-black OLED background.
+- **5-Image Auto-Rotating Wallpaper Carousel**:
+  - Bundled 5 wallpapers in `themes/galvis/wallpapers/`: `01-ruska-lake.jpg`, `02-dusk-peaks.jpg`, `03-aurora.jpg`, `04-moon-lake.jpg`, `05-city-lights.jpg`.
+  - Added `WallpaperPlayer.cycleNext()` to allow instantaneous remote-triggered wallpaper cycling.
+- **Frosted Connectivity (Wi-Fi / LAN) Flydown Menu**:
+  - Replaced direct settings intent with an anchored frosted glass dropdown.
+  - Active network row showing Ethernet (LAN) or Wi-Fi SSID with status indicator.
+  - Saved/scanned Wi-Fi network selection with one-click connection or password prompt.
+  - Direct shortcut to system Wi-Fi / Ethernet settings.
+- **Enhanced Inputs Frosted Flydown Menu**:
+  - Always-visible header button ensuring input switching is immediately accessible.
+  - Fallback smart inputs on unprobed systems: HDMI 1, HDMI 2 · PlayStation 5 (eARC), HDMI 3, AV Input, Live TV.
+
+---
+
 ## [0.4.0] - 2026-10-23
 
 ### Added
