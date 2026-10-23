@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.1] - 2026-10-23
+
+### Added
+- **Multi-Layer Floating Glass Highlight**:
+  - Engineered a 4-layer composite highlight in `bg_tile_focus_rim.xml` matching CleanYourTV and Apple TV tvOS.
+  - Layer 1: Contrast drop shadow perimeter ensuring crisp edge separation on pure white cards (e.g. YouTube).
+  - Layer 2: Radiant ice-blue luminous glass bezel (`#F080D8FF`).
+  - Layer 3: Crisp diamond-white core outline (`#FFFFFFFF`).
+  - Layer 4: Specular glass glare gradient simulating polished curved glass sheen across the top 45% of the focused card.
+- **Physical Spring D-Pad Physics**:
+  - Upgraded `FocusScaleHelper.kt` to use `OvershootInterpolator(1.35f)` with 160ms timing for that signature Apple TV physical spring bounce.
+  - Added hardware-accelerated luminous cyan spot shadow elevation (`outlineSpotShadowColor = #B364B5F6`, `translationZ = 20f`) on API 28+ devices.
+
+---
+
 ## [0.2.0] - 2026-10-23
 
 ### Added
