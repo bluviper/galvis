@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-10-23
+
+### Added
+- **CleanYourTV Hero Banner Parity**:
+  - Aligned home layout with the hero banner specification from [cleanyour.tv](https://cleanyour.tv/).
+  - **4-Column Lower App Grid**: Converted `rvAllApps` from 6 columns to 4 columns, matching the 4 cards in the Apple TV dock band with pixel-exact vertical column alignment.
+  - **Full-Size Card Geometry Parity**: Standardized all grid cards to `180dp x 102dp` (16:9 aspect ratio) with `16dp` rounded corners, matching the dock cards.
+  - **Centered Dock Band**: Re-anchored `dockBand` with symmetric start and end parent constraints, centering the dock band at horizontal center (960px on 1080p).
+  - **Left-Aligned Shelf Title**: Constrained `tvFocusedTitle` to the start of `dockBand` with a 14dp inset, aligning with the left edge of the first dock card.
+  - **Atmospheric Ambient Glow**: Expanded the ambient radial glow height to 500dp with a widened radius of 850f, producing a soft background haze matching CleanYourTV's `radial-gradient(55% 50% at 30% 42%, var(--glow, rgba(0,0,0,0)) 0%, rgba(0,0,0,0) 70%)`.
+  - **Smart Tile Label Spacing**: Enhanced inline labels with 8dp top margin and crisp 13sp typography that reveals only when focused.
+
+---
+
 ## [0.2.1] - 2026-10-23
 
 ### Added

@@ -15,8 +15,10 @@
 ## Key Features
 
 - **Apple TV-Style Frosted Dock**: A centered, rounded band housing your 4 primary favorite applications.
-- **Top Shelf Title & Dynamic Ambient Glow**: Displays the active application title in large bold type, accompanied by a dynamic radial backdrop glow tinted to match the app's brand artwork via AndroidX Palette.
+- **4-Column Clean Alignment**: The lower application grid features 4 columns with `180dp x 102dp` cards aligned directly under the 4 dock cards, matching the hero layout from [CleanYourTV](https://cleanyour.tv/).
+- **Top Shelf Title & Dynamic Ambient Glow**: Displays the active application title in large bold type left-aligned to the dock, accompanied by a dynamic radial backdrop glow tinted to match the app's brand artwork via AndroidX Palette.
 - **Full-Bleed 16dp Masked Tiles**: App banners (YouTube, Play Store, Prime, etc.) fill the entire tile surface edge-to-edge without letterboxing or empty black borders, clipped to a 16dp rounded mask.
+- **Multi-Layer Floating Glass Highlight**: 4-layer composite focus rim (contrast drop shadow, radiant ice-blue bezel, diamond-white core, and specular glass glare) with 160ms physical spring bounce (`OvershootInterpolator(1.35f)`).
 - **Anchored Inputs Flyout Menu**: A frosted glass dropdown anchored directly under the `Inputs` header pill, allowing instant switching between HDMI 1–3, PlayStation 5, AV, and Live TV with real-time connection status dots.
 - **Header Pill Focus Inversion**: Compound drawables and text on frosted pill buttons (`Inputs`, `Wi-Fi`, `Settings`) synchronously invert from white to solid pitch-black (`#000000`) when focused.
 - **Smart App Label Reveal**: Dock items use the top shelf for naming, while lower-grid tiles reveal clean labels underneath only when focused.

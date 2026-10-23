@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             adapter = dockAdapter
         }
 
-        // All Apps Lower Grid (6 Columns, Smooth Vertical D-pad Scrolling)
+        // All Apps Lower Grid (4 Columns, Aligned with Apple TV Dock Cards)
         gridAdapter = AppAdapter(
             layoutResId = R.layout.item_grid_app,
             onItemClick = { app -> launchItem(app) },
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
             onItemFocused = { app, isFocused -> onAppFocused(app, isFocused, isDock = false) }
         )
         binding.rvAllApps.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, 6)
+            layoutManager = GridLayoutManager(this@MainActivity, 4)
             adapter = gridAdapter
         }
     }
@@ -318,7 +318,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun applyGlowColor(color: Int) {
-        val semiTransparent = ColorUtils.setAlphaComponent(color, 120)
+        val semiTransparent = ColorUtils.setAlphaComponent(color, 135)
         val transparent = ColorUtils.setAlphaComponent(color, 0)
 
         val gradient = GradientDrawable(
@@ -326,8 +326,8 @@ class MainActivity : AppCompatActivity() {
             intArrayOf(semiTransparent, transparent)
         ).apply {
             gradientType = GradientDrawable.RADIAL_GRADIENT
-            gradientRadius = 750f
-            setGradientCenter(0.40f, 0.25f)
+            gradientRadius = 850f
+            setGradientCenter(0.35f, 0.35f)
         }
         binding.ivAmbientGlow.setImageDrawable(gradient)
     }
