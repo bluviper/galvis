@@ -1,29 +1,36 @@
-# GalVis TV Launcher
+# GALVis™ TV Launcher
 
-**GalVis** is a minimalist, debloated, high-performance Android TV launcher inspired by the aesthetics of Apple TV (tvOS) and [CleanYourTV](https://github.com/Gathin23/cleanyourtv). Built specifically for memory-conscious Google TV devices such as the **TCL 55C635**, it eliminates sponsored rows, recommendation feeds, and vendor bloat while preserving smooth 60 fps remote navigation.
+**GALVis™** is an ultra-minimalist, high-performance Android TV & Google TV launcher that eliminates sponsored rows, recommendation feeds, and vendor bloat while preserving smooth 60 fps remote navigation. Built on a rock-solid, zero-bloat foundation with a compiled footprint of just **474 KB**, GALVis™ is engineered specifically for memory-conscious televisions such as the **TCL 55C635** (2 GB RAM, Cortex-A55).
 
 ---
 
 ## Visual Showcase
 
-| Home Screen & Ambient Glow | Anchored Inputs Flyout Menu |
+| GALVis™ Signature Hybrid Theme | Anchored Inputs Flyout Menu |
 |:---:|:---:|
-| ![GalVis Home Screen](docs/images/home_screen.png) | ![Inputs Flyout](docs/images/inputs_menu.png) |
+| ![GALVis Mashup](docs/images/galvis_mashup.png) | ![Inputs Flyout](docs/images/inputs_menu.png) |
 
 ---
 
-## Key Features
+## The Signature GALVis™ Theme Mashup
 
-- **Apple TV-Style Frosted Dock**: A centered, rounded band housing your 4 primary favorite applications.
-- **4-Column Clean Alignment**: The lower application grid features 4 columns with `180dp x 102dp` cards aligned directly under the 4 dock cards, matching the hero layout from [CleanYourTV](https://cleanyour.tv/).
-- **Top Shelf Title & Dynamic Ambient Glow**: Displays the active application title in large bold type left-aligned to the dock, accompanied by a dynamic radial backdrop glow tinted to match the app's brand artwork via AndroidX Palette.
-- **Full-Bleed 16dp Masked Tiles**: App banners (YouTube, Play Store, Prime, etc.) fill the entire tile surface edge-to-edge without letterboxing or empty black borders, clipped to a 16dp rounded mask.
-- **Multi-Layer Floating Glass Highlight**: 4-layer composite focus rim (contrast drop shadow, radiant ice-blue bezel, diamond-white core, and specular glass glare) with 160ms physical spring bounce (`OvershootInterpolator(1.35f)`).
-- **Anchored Inputs Flyout Menu**: A frosted glass dropdown anchored directly under the `Inputs` header pill, allowing instant switching between HDMI 1–3, PlayStation 5, AV, and Live TV with real-time connection status dots.
-- **Header Pill Focus Inversion**: Compound drawables and text on frosted pill buttons (`Inputs`, `Wi-Fi`, `Settings`) synchronously invert from white to solid pitch-black (`#000000`) when focused.
-- **Smart App Label Reveal**: Dock items use the top shelf for naming, while lower-grid tiles reveal clean labels underneath only when focused.
-- **Zero-Bloat Performance**: Written in native Kotlin and AndroidX Views (`RecyclerView`) rather than Jetpack Compose for TV to ensure fluid 60 fps navigation within the 2 GB RAM budget of the TCL 55C635.
-- **Preserved Cast Ecosystem**: Operates as a pure launcher activity; Google Cast and Chromecast built-in remain 100% operational in the background.
+GALVis™ features a unified hybrid theme combining the best visual characteristics across three design systems:
+
+1. **Glass Theme Overlays & App Glow**:
+   - `dock_glass: true`: Frosted translucent dock band allowing wallpapers and backdrop gradients to shine through.
+   - `dock_opacity: 70`: 70% opacity for delicate atmospheric depth.
+   - `app_glow: true`: Dynamic halo glow that extracts the active app's dominant brand color and bathes the tile in vibrant light.
+   - `advanced_effects: true`: Lifted card elevation with hardware-accelerated ambient shadows.
+2. **Ruska Landscape & Mood**:
+   - `wallpaper: true` + `wallpaper_true_color: true`: Finnish autumn dusk wallpaper over a calm lake, rendered with 32-bit color precision to prevent color banding.
+   - `background_color: "#07080D"`: Deep, comfortable midnight twilight palette.
+3. **Six-Column Expansive Grid**:
+   - `columns: 6`: Compact 6-item card row providing fast, direct access to more apps.
+   - `rows_below_dock: 1`: One grid row peeks out beneath the dock, giving immediate visual anticipation of installed apps.
+4. **Minimalist Icon-Only Header**:
+   - `icon_only_buttons: true` & `icon_only_inputs: true`: Inputs, Wi-Fi, and Settings appear as round, frosted icon buttons with **zero text clutter**.
+   - `wifi_status_color: true`: Subtle emerald green state when online.
+   - `focus_overshoot: true`: Authentic Apple TV tvOS spring bounce physics on D-pad navigation.
 
 ---
 
@@ -31,11 +38,12 @@
 
 | Parameter | Specification |
 |---|---|
-| **Language** | Kotlin 1.9.x |
+| **Package** | `com.gathin.tvhome` (GALVis™ Edition) |
+| **APK Footprint** | **474 KB** (sub-500 KB, ProGuard/R8 optimized) |
 | **Minimum SDK** | Android 8.0 (API 26) |
 | **Target SDK** | Android 14 (API 34) |
-| **UI Framework** | AndroidX Views + Material Components (`ConstraintLayout`, `RecyclerView`, `MaterialCardView`) |
-| **Color Extraction** | AndroidX Palette KTX |
+| **UI Framework** | Pure Java + AndroidX RecyclerView + DynamicAnimation |
+| **Theme Engine** | Hot-swappable JSON overlays (`config.json` + `wallpaper.jpg`) |
 | **Target Device** | TCL 55C635 (Google TV / Android TV 11, RT51M / RT2872 chipset, 2 GB RAM) |
 | **Testing Target** | Android TV Emulator (`Television_1080p`, 1920x1080 @ 320 DPI) |
 

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] - 2026-10-23
+
+### Added
+- **Unified Engine: CleanYourTV Foundation Branded as GALVis™**:
+  - Adopted the 474 KB ultra-low-footprint launcher engine as the primary core, eliminating framework overhead and achieving instant cold-start on the TCL 55C635 (2 GB RAM).
+  - Renamed user-facing strings and launcher settings to **GALVis™**.
+- **Signature "GALVis" Theme Mashup**:
+  - **Glass Elements**: Frosted translucent dock (`dock_glass: true`, `dock_opacity: 70`) so wallpapers shine through; full dynamic per-app glow (`app_glow: true`, `ambient_glow: true`); and advanced card hover physics (`advanced_effects: true`).
+  - **Ruska Atmosphere**: Twilight lake backdrop (`wallpaper: true`, `wallpaper_true_color: true`) over a deep midnight navy base (`#07080D`).
+  - **Six-Column Grid**: Configured 6-item columns (`columns: 6`) with a bottom row peek (`rows_below_dock: 1`) for expansive app browsing.
+  - **Minimalist Icon-Only Header**: Round frosted pill buttons with no text clutter (`icon_only_buttons: true`, `icon_only_inputs: true`) and real-time emerald Wi-Fi state (`wifi_status_color: true`).
+  - **Fluid Spring Physics**: Maintained signature Apple TV spring bounce (`focus_overshoot: true`).
+
+---
+
 ## [0.3.0] - 2026-10-23
 
 ### Added
