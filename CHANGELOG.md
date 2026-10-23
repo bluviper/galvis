@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.6.0] - 2026-10-24
+
+### Added
+- **Continuous Horizontal Carousel Rewind Loop**:
+  - Implemented tape-rewind physics on horizontal shelves (*All Apps*, *Netflix*, *YouTube*, *Disney+*): pressing `DPAD_RIGHT` on the last card smoothly glides focus and highlight back to Card 0 in ~350ms (`280f / densityDpi`).
+  - Added strict focus trapping in `ShelfRecyclerView`: suppressed `clearChildFocus` during rewind and constrained horizontal `focusSearch` so focus never escapes to top header buttons (`btnWifi`) or vertical rows.
+  - Coordinated `GlassView` glide: pre-calculates Card 0's resting target position in root coordinates and animates the glass across the carousel using a critically damped spring ($\zeta = 1.0$), eliminating overshooting.
+
+### Fixed
+- **Symmetric Glass Highlight Placement**:
+  - Switched from matrix-scaled `getLocationInWindow` to hierarchy-relative `root.offsetDescendantRectToMyCoords(card, r)`, eliminating the 15px left and 8px top offset bias caused by transient 1.08x focus zoom animations.
+  - Aligned padding to a uniform 6dp (`6f * density`) on top, bottom, left, and right.
+  - Standardized outline corner radius to 16dp across card layouts, card containers, and `GlassView`.
+- **In-Bounds Viewport Settling on Trailing Edge Cards**:
+  - Dispatched focus events via `v.post(...)` in `ShelfAdapter`, ensuring horizontal scroll deltas settle before glass target coordinates are determined.
+  - Fixed clamping bounds in `focusShelf` and `onShelfKey` to use `adapter.getItemCount() - 1` instead of `adapter.appCount() - 1`.
+- **Card Background Border Collision**:
+  - Removed redundant 2dp focused white stroke in `bg_shelf_card.xml`, allowing `GlassView` to act as the single, polished floating glass highlight without doubled borders.
+
+---
+
 ## [0.5.0] - 2026-10-23
 
 ### Added

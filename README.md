@@ -6,9 +6,9 @@
 
 ## Visual Showcase
 
-| Home Screen & 6-Column Dock | Wallpaper Switcher Flydown | Inputs & Connectivity Flydown |
+| Home Screen & 6-Column Dock | Horizontal Shelf Rewind Loop | Inputs & Connectivity Flydown |
 |:---:|:---:|:---:|
-| ![Home Screen](docs/images/home_screen.png) | ![Wallpaper Flydown](docs/images/wallpaper_flydown.png) | ![Inputs Flydown](docs/images/inputs_flydown.png) |
+| ![Home Screen](docs/images/home_screen.png) | ![Shelf Rewind](docs/images/shelf_rewind_settled.png) | ![Inputs Flydown](docs/images/inputs_flydown.png) |
 
 ---
 
@@ -31,6 +31,9 @@ GALVis™ features a unified hybrid theme combining the best visual characterist
    - `icon_only_buttons: true` & `icon_only_inputs: true`: Inputs, Wi-Fi, and Settings appear as round, frosted icon buttons with **zero text clutter**.
    - `wifi_status_color: true`: Subtle emerald green state when online.
    - `focus_overshoot: true`: Authentic Apple TV tvOS spring bounce physics on D-pad navigation.
+5. **Horizontal Shelves & Analog Tape-Rewind Loop**:
+   - Fluid horizontal content shelves (*All Apps*, *Netflix*, *YouTube*, *Disney+*).
+   - Pressing `DPAD_RIGHT` on the last shelf card smoothly rewinds the carousel to Card 0 (~350ms) while the floating glass highlight glides gracefully back without escaping to top buttons or adjacent rows. See detailed documentation in [Horizontal Shelf Rewind & Glass Alignment Specification](docs/horizontal-shelf-rewind-and-glass-alignment.md).
 
 ---
 
@@ -135,11 +138,12 @@ adb -s emulator-5554 shell am start -n com.galvis.launcher.debug/com.galvis.laun
 
 ## Remote / D-Pad Navigation
 
-- **DPAD_UP**: Moves focus from dock to the header pills (`Inputs`, `Wi-Fi`, `Settings`).
-- **DPAD_DOWN**: Moves focus from header to dock, or from dock into the all-apps grid (revealing app labels).
+- **DPAD_UP**: Moves focus from dock to the header pills (`Inputs`, `Wi-Fi`, `Settings`), or from lower horizontal shelves to the row above.
+- **DPAD_DOWN**: Moves focus from header to dock, or down into horizontal shelves (*All Apps*, *Netflix*, *YouTube*, *Disney+*).
+- **DPAD_LEFT / DPAD_RIGHT**: Navigates horizontally across shelf cards. At the end of any horizontal shelf, pressing `DPAD_RIGHT` smoothly tape-rewinds the carousel back to the first card (`index 0`) with the glass highlight gliding gracefully back.
 - **DPAD_CENTER / OK**:
   - On an app tile: Launches the application.
   - On the `Inputs` button: Opens the anchored flyout menu.
   - Inside the Inputs menu: Tunes the selected HDMI port / Live TV.
 - **LONG_CLICK (Hold OK)**: Pins or unpins an application from the Favorites dock band.
-- **BACK**: Dismisses the active Inputs popup, or returns focus directly to the Favorites dock.
+- **BACK**: Dismisses active flyout menus, or returns focus directly to the Favorites dock.
