@@ -1,0 +1,12 @@
+TASK 10098:com.google.android.youtube.tv.main id=53 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.google.android.youtube.tv/com.google.android.apps.youtube.tv.activity.MainActivity 199e585 pid=2376 userId=0 uid=10098 displayId=0(type=INTERNAL)
+    Failure while dumping the activity: java.io.IOException: Timeout
+
+TASK 10127:com.galvis.launcher.debug id=55 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.galvis.launcher.debug/com.galvis.launcher.MainActivity e3cbdf0 pid=3669 userId=0 uid=10127 displayId=0(type=INTERNAL)
+
+*** SERVICE 'activity' DUMP TIMEOUT (10000ms) EXPIRED ***
+
+
+*** SERVICE 'activity' DUMP TIMEOUT (10000ms) EXPIRED ***
+

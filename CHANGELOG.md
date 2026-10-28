@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-10-28
+
+### Added
+- **Integrated Tester Issue Reporting & QR Telemetry Dialog (`ReportIssueDialog`)**:
+  - Direct on-device modal for beta testers accessible across 3 key launcher menus:
+    - **Launcher Settings**: Dedicated `reportIssueChoice` row under system settings.
+    - **Header Flydown Menus**: Directly accessible in `showSettingsMenu()` and `showTopMenu()`.
+    - **Quick Settings Panel**: Remote hardware Settings key glass overlay (`QuickSettingsActivity`).
+  - **Scan-to-Report QR Code Engine**: Generates a high-contrast 400x400 QR code bitmap on-screen via ZXing encoding a pre-filled GitHub issue URL with complete TV diagnostic telemetry. Allows testers to point their phone camera at the screen and file reports in 5 seconds with zero on-TV typing.
+  - **Live Hardware Telemetry Extraction**: Captures device manufacturer & model, Android OS & API level, display resolution & DPI density, available RAM & heap memory, and build fingerprint.
+  - **Fallback Actions**: Supports direct "Open on TV" via `ACTION_VIEW` for TVs with web browsers and "Copy link & specs" to Android's `ClipboardManager`.
+  - **Comprehensive Unit Testing (`ReportIssueTest`)**: Added JVM unit test suite verifying URL parameter encoding and square QR bit-matrix generation.
+
+---
+
+## [1.0.0] - 2026-10-24
+
+### Added
+- **48-Hour Hardware Soak & Beta Testing Phase**:
+  - Live baseline established on physical TCL 55C635 (Android 11, PID 2315, Java Heap ~3.5 MB, Total PSS ~64 MB).
+  - Verified hardware streaming under load: Google Cast (25.7 MB PSS), Amazon Prime Video (23.5 MB PSS, Widevine L1 & HDCP intact), and native 4K Netflix (28.4 MB PSS, survived LMK memory pressure).
+  - Verified predictable TV UX focus anchoring to Favorite Card 0 on Home return.
+  - Documented Google Play 20-tester closed testing roadmap and zero-paywall FOSS positioning strategy in `docs/beta-testing-and-stress-test.md`.
+  - Compiled complete XDA Developers launch thread, technical benchmarks, and community tester onboarding campaign in `xda_launch_kit.md`.
+- **Standalone TV Launcher Engine (`com.galvis.tvhome`)**:
+  - Independent standalone project in `galvis/` with dedicated application ID and namespace.
+  - Zero dependencies on external theme loaders; fully standalone launcher APK (< 3.2 MB) and Google Play App Bundle (`.aab`).
+  - Auto-seeding bundled wallpaper engine on first boot (`Config.seedBundledWallpapers`).
+- **5 High-Resolution 1080p Photographic Wallpapers**:
+  - Transformed user photographs into calibrated 16:9 1080p wallpapers bundled directly in `assets/wallpapers/`:
+    - `01-pine-sprout.jpg`: *Pine Sprout*
+    - `02-fairy-glen.jpg`: *Fairy Glen*
+    - `03-modern-interior.jpg`: *Modern Living*
+    - `04-oregon-coast.jpg`: *Oregon Coast*
+    - `05-alpine-lake.jpg`: *Alpine Lake*
+  - Included dynamic display captioning with rotation support every 10 minutes.
+- **Physical TV Deployment & Persistence (TCL 55C635 / Android 11 Google TV)**:
+  - Deployed directly over ADB to physical TV (`192.168.31.124:5555`).
+  - Enabled speed profile compilation (`cmd package compile -m speed -f com.galvis.tvhome`).
+  - Set as primary persistent Home activity (`cmd package set-home-activity`).
+  - Disabled stock Google TV launcher components (`launcherx` and `setupwraith`) to guarantee persistent boot loading.
+  - Set minimal clock screensaver to `com.galvis.tvhome/.ClockDream`.
+- **Distribution & Monetization Infrastructure**:
+  - Added standalone `README.md`, `LICENSE` (GPLv3 with MIT & SIL OFL attributions), and `PRIVACY.md` (zero telemetry).
+  - Added `keystore.properties.example` and release signing workflow for Google Play Console submission.
+  - Integrated Buy Me a Coffee and Ko-fi tipping badges.
+
+---
+
 ## [0.6.0] - 2026-10-24
 
 ### Added

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="720dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/glass_panel"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingTop="26dp"
+    android:paddingBottom="26dp"
+    android:elevation="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report_issue_title"
+        android:textColor="#FFFFFFFF"
+        android:textSize="22sp"
+        android:fontFamily="@string/font_medium"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/report_issue_subtitle"
+        android:textColor="#B3FFFFFF"
+        android:textSize="14sp"
+        android:lineSpacingExtra="2sp"
+        android:fontFamily="@string/font_body" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- QR Code Block -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <FrameLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/qr_background"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/qrCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/report_issue_scan_hint" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/report_issue_scan_hint"
+                android:textColor="#99FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@string/font_body" />
+        </LinearLayout>
+
+        <!-- Diagnostics & Actions Block -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="28dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTelemetry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E6FFFFFF"
+                android:textSize="13sp"
+                android:lineSpacingExtra="3sp"
+                android:fontFamily="@string/font_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:gravity="start">
+
+                <TextView
+                    android:id="@+id/btnOpenTv"
+                    style="@style/TopButton"
+                    android:layout_marginStart="0dp"
+                    android:text="@string/report_issue_open_tv"
+                    android:drawableStart="@drawable/ic_picture"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnCopyLink"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/report_issue_copy"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/btnClose"
+                    style="@style/TopButton"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/report_issue_close"
+                    android:focusable="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

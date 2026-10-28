@@ -5,6 +5,9 @@
 *.aab
 *.ap_
 *.dex
+*.jks
+*.keystore
+keystore.properties
 
 # Local Android SDK configuration
 local.properties
