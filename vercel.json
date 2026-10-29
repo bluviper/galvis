@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/pro-form.html" },
+    { "source": "/form", "destination": "/pro-form.html" }
+  ]
+}
