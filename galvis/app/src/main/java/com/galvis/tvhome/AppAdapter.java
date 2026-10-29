@@ -354,10 +354,22 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Shelf youTubeShelf = buildYouTubeShelf();
         Shelf disneyShelf = buildDisneyShelf();
 
-        // The Favorites dock row gets only the first dockSize entries
+        // The Favorites dock row gets only the first dockSize entries; if fewer apps are installed
+        // than dockSize, pad the remaining dock slots with Entry.EMPTY so the dock row always spans
+        // indices 0 .. dockSize - 1 and shelves always start at index dockSize.
         List<Entry> finalItems = new ArrayList<>();
-        for (int i = 0; i < Math.min(dockSize, fresh.size()); i++) {
+        int filled = Math.min(dockSize, fresh.size());
+        for (int i = 0; i < filled; i++) {
             finalItems.add(fresh.get(i));
+        }
+        if (filled < dockSize) {
+            int padSlots = dockSize - filled;
+            docked = filled;
+            emptySlots = padSlots;
+            for (int i = 0; i < padSlots; i++) {
+                finalItems.add(new Entry(Entry.EMPTY, "", new ComponentName(ctx, "empty-dock-pad-" + i),
+                        null, null, null, 0));
+            }
         }
 
         // Add the 4 Shelves below the Favorites dock
@@ -654,9 +666,9 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return emptySlots > 0;
     }
 
-    /** Tiles that can be moved: only the dock slots can be reordered by the owner. */
+    /** Tiles that can be moved: only the occupied dock slots can be reordered by the owner. */
     int movableCount() {
-        return Math.min(dockSize, items.size());
+        return Math.min(dockFilled(), items.size());
     }
 
     /** Keys of the movable tiles in their current order, for Order (empty dock slots are not tiles). */

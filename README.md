@@ -1,5 +1,9 @@
 # GALVis™ TV Launcher
 
+<p align="center">
+  <img src="docs/marketing/logo-1.png" alt="GALVis TV Logo" width="360" />
+</p>
+
 **GALVis™** is an ultra-minimalist, high-performance Android TV & Google TV launcher that eliminates sponsored rows, recommendation feeds, and vendor bloat while preserving smooth 60 fps remote navigation. Built on a rock-solid, zero-bloat foundation with a compiled footprint of just **474 KB**, GALVis™ is engineered specifically for memory-conscious televisions such as the **TCL 55C635** (2 GB RAM, Cortex-A55).
 
 ---
@@ -41,7 +45,7 @@ GALVis™ features a unified hybrid theme combining the best visual characterist
 
 | Parameter | Specification |
 |---|---|
-| **Package** | `com.gathin.tvhome` (GALVis™ Edition) |
+| **Package** | `com.galvis.tvhome` |
 | **APK Footprint** | **474 KB** (sub-500 KB, ProGuard/R8 optimized) |
 | **Minimum SDK** | Android 8.0 (API 26) |
 | **Target SDK** | Android 14 (API 34) |

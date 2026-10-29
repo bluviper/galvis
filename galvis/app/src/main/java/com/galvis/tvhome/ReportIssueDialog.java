@@ -39,7 +39,7 @@ import java.util.Map;
  */
 public final class ReportIssueDialog {
 
-    static final String GITHUB_REPO_ISSUES_URL = "https://github.com/galvis-project/galvis/issues/new";
+    static final String GITHUB_REPO_ISSUES_URL = "https://github.com/bluviper/galvis/issues/new";
 
     private ReportIssueDialog() {}
 

@@ -104,6 +104,17 @@ public class GridNavigationTest {
         }
     }
 
+    @Test public void sevenColumnDockWithSixAppsStopsAtSix() {
+        int dockApps = 6;
+        int columns = 7;
+        int padSlots = columns - dockApps;
+        assertEquals(5, DockSlots.focusable(6, dockApps, padSlots));
+        assertTrue(GridNavigation.atHorizontalEdge(5, dockApps, columns, false, false));
+        assertFalse(GridNavigation.atHorizontalEdge(5, dockApps, columns, false, true));
+        assertTrue(GridNavigation.atHorizontalEdge(0, dockApps, columns, false, true));
+        assertFalse(GridNavigation.atHorizontalEdge(0, dockApps, columns, false, false));
+    }
+
     private static List<GridCase> grids() {
         List<GridCase> grids = new ArrayList<>();
         for (int columns = 1; columns <= 8; columns++) {

@@ -31,3 +31,7 @@ galvis_live*.png
 galvis_screen*.png
 screen_updated*.png
 current_screen.png
+wallpaper_*.jpg
+galvis_prototype/
+samples/netflix_crop*.png
+samples/smart_iptv_crop*.png
