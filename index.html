@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GALVis™ TV Launcher — Beta Tester Compatibility Form</title>
+<style>
+:root {
+  color-scheme: dark;
+  /* Palette tuned to GALVis logo: Deep charcoal slate + vibrant electric orange */
+  --bg: #0b0d11;
+  --bg-gradient-center: #13171e;
+  --ink: #f2f5f9;
+  --muted: #95a2b1;
+  --muted-light: #c1ccd8;
+  --beam: #f6841f;              /* Primary logo orange */
+  --beam-light: #ff9e42;        /* Vibrant amber highlight */
+  --beam-deep: #e25816;         /* Rich sunset orange */
+  --beam-glow: rgba(246, 132, 31, 0.38);
+  --charcoal-slate: #2a2f39;    /* Logo slate gray */
+  --glass: rgba(20, 24, 31, 0.72);
+  --glass-surface: rgba(42, 47, 57, 0.35);
+  --glass-surface-hover: rgba(246, 132, 31, 0.08);
+  --glass-surface-active: rgba(246, 132, 31, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-border-hover: rgba(246, 132, 31, 0.35);
+  --glass-border-focus: rgba(246, 132, 31, 0.75);
+  --accent-gradient: linear-gradient(135deg, #ff9e42 0%, #f6841f 52%, #e25816 100%);
+  --danger: #ff6b6b;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; }
+
+@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+html { height: 100%; }
+body {
+  margin: 0;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 48px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(115deg, transparent 38%, rgba(246, 132, 31, 0.09) 44%, transparent 50%),
+    linear-gradient(115deg, transparent 56%, rgba(226, 88, 22, 0.11) 62%, transparent 70%),
+    radial-gradient(70% 50% at 20% 0%, rgba(246, 132, 31, 0.22), transparent 75%),
+    radial-gradient(60% 60% at 85% 95%, rgba(226, 88, 22, 0.18), transparent 75%),
+    radial-gradient(100% 100% at 50% 50%, var(--bg-gradient-center) 0%, var(--bg) 100%);
+  background-attachment: fixed;
+  line-height: 1.5;
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 640px);
+  border-radius: 28px;
+  padding: 40px 36px 36px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  backdrop-filter: blur(28px) saturate(170%);
+  box-shadow:
+    0 24px 64px -12px rgba(0, 0, 0, 0.8),
+    0 8px 28px -4px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Two-streak rotating conic border glow with logo amber-orange */
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle),
+    transparent 0 42%, var(--beam) 46%, #fff 49.5%, transparent 50%,
+    transparent 50% 92%, var(--beam) 96%, #fff 99.5%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: spin 9s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.card::after {
+  filter: blur(14px);
+  opacity: .68;
+}
+@keyframes spin { to { --angle: 360deg; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .card::before, .card::after { animation-play-state: paused; }
+}
+
+/* Brand Header */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+}
+.brand-logo {
+  height: 44px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 18px rgba(246, 132, 31, 0.28));
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--beam-light);
+  background: rgba(246, 132, 31, 0.12);
+  border: 1px solid rgba(246, 132, 31, 0.32);
+  border-radius: 999px;
+  box-shadow: 0 0 12px -2px rgba(246, 132, 31, 0.2);
+}
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--beam);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--beam);
+  animation: pulse 2s infinite ease-in-out;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1.25;
+}
+.card .sub {
+  margin: 0 0 32px;
+  font-size: 0.9375rem;
+  color: var(--muted-light);
+  line-height: 1.5;
+}
+
+/* Form Sections */
+.form-group {
+  margin-bottom: 26px;
+}
+.field-header {
+  margin-bottom: 9px;
+}
+.field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.field-label .required-mark {
+  color: var(--beam);
+  margin-left: 3px;
+  font-weight: 700;
+}
+.field-hint {
+  display: block;
+  font-size: 0.785rem;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+/* Text Inputs & Textarea */
+.input-text, .input-textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(14, 17, 23, 0.55);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.875rem;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.input-text::placeholder, .input-textarea::placeholder {
+  color: #5d6876;
+}
+.input-text:focus, .input-textarea:focus {
+  outline: none;
+  border-color: var(--beam);
+  background: rgba(18, 22, 30, 0.75);
+  box-shadow: 0 0 0 3px rgba(246, 132, 31, 0.2), inset 0 1px 2px rgba(0,0,0,0.5);
+}
+.input-textarea {
+  min-height: 104px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Custom Radio Tile / Pill Options */
+.options-grid {
+  display: grid;
+  gap: 10px;
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 540px) {
+  .grid-cols-2, .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: all .15s ease;
+}
+.option-tile:hover {
+  background: var(--glass-surface-hover);
+  border-color: var(--glass-border-hover);
+}
+.option-tile input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: transparent;
+  display: grid;
+  place-content: center;
+  transition: border-color .15s ease, background-color .15s ease;
+  flex-shrink: 0;
+}
+.option-tile input[type="radio"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform .15s ease;
+  background-color: var(--beam);
+  box-shadow: 0 0 6px var(--beam);
+}
+.option-tile input[type="radio"]:checked {
+  border-color: var(--beam);
+}
+.option-tile input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+.option-tile:has(input[type="radio"]:checked) {
+  background: var(--glass-surface-active);
+  border-color: var(--beam);
+  box-shadow: 0 0 18px -4px rgba(246, 132, 31, 0.28);
+}
+.option-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.option-label .option-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  display: block;
+  font-weight: 400;
+  margin-top: 1px;
+}
+.option-tile:has(input[type="radio"]:checked) .option-label {
+  color: #fff;
+  font-weight: 600;
+}
+.option-tile:has(input[type="radio"]:checked) .option-sub {
+  color: var(--muted-light);
+}
+
+/* Inline text input for "Other" android version */
+.other-detail-box {
+  margin-top: 10px;
+  display: none;
+}
+.other-detail-box.show {
+  display: block;
+}
+
+/* Submit Button & Actions */
+.submit-container {
+  margin-top: 32px;
+}
+.btn-submit {
+  width: 100%;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #140902;
+  background: var(--accent-gradient);
+  box-shadow: 0 6px 22px -3px rgba(246, 132, 31, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px -2px rgba(246, 132, 31, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.btn-submit:active {
+  transform: translateY(1px);
+  filter: brightness(0.96);
+}
+.btn-submit:focus-visible {
+  outline: 2px solid var(--beam);
+  outline-offset: 3px;
+}
+.btn-submit[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-note {
+  margin-top: 12px;
+  font-size: 0.735rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Hidden target iframe to prevent Google Forms redirect page */
+#hidden_iframe {
+  display: none;
+}
+
+/* Success State Screen */
+.success-card {
+  display: none;
+  text-align: center;
+  padding: 24px 8px;
+}
+.success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: rgba(246, 132, 31, 0.12);
+  border: 1px solid var(--beam);
+  box-shadow: 0 0 24px var(--beam-glow);
+  display: grid;
+  place-content: center;
+  color: var(--beam);
+}
+.success-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.success-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.success-card p {
+  color: var(--muted-light);
+  font-size: 0.9375rem;
+  max-width: 440px;
+  margin: 0 auto 24px;
+}
+.btn-reset {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all .15s ease;
+}
+.btn-reset:hover {
+  background: var(--glass-surface-hover);
+  border-color: var(--beam);
+  color: #fff;
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(20, 9, 2, 0.35);
+  border-top-color: #140902;
+  border-radius: 50%;
+  animation: spin-load .7s linear infinite;
+  display: none;
+}
+@keyframes spin-load {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px 26px;
+    border-radius: 20px;
+  }
+  .brand-logo {
+    height: 36px;
+  }
+  .card h1 {
+    font-size: 1.35rem;
+  }
+}
+</style>
+</head>
+<body>
+
+  <main class="card">
+    <!-- Main Form Content -->
+    <div id="form-content">
+      <div class="brand-header">
+        <div class="brand-logo-wrap">
+          <img src="docs/marketing/logo-1.png" alt="GALVis™ TV Launcher" class="brand-logo">
+        </div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Beta Compatibility Bench
+        </div>
+      </div>
+
+      <h1>GALVis™ TV Launcher — Beta Tester Compatibility Form</h1>
+      <p class="sub">Help us test GALVis across as many TV brands as possible. Takes less than 2 minutes.</p>
+
+      <!-- Connected Live to Google Form -->
+      <form id="beta-form"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSf9WgpsvssKVJzy34JjjOcrEz-k7DOLnCSuwxQlV7U9e3yKGg/formResponse"
+            method="POST"
+            target="hidden_iframe"
+            novalidate>
+
+        <!-- 1. TV / Device Brand & Model -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label" for="device_model">
+              1. TV / Device Brand &amp; Model <span class="required-mark">*</span>
+            </label>
+            <span class="field-hint">e.g., Sony Bravia X90J, TCL 55C635, Chromecast with Google TV 4K, Nvidia Shield</span>
+          </div>
+          <input
+            id="device_model"
+            class="input-text"
+            type="text"
+            name="entry.1395494817"
+            placeholder="Type your device model here..."
+            required
+            autocomplete="off"
+          >
+        </div>
+
+        <!-- 2. Android Version -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label">
+              2. Android Version <span class="required-mark">*</span>
+            </label>
+            <span class="field-hint">Select the OS version running on your device</span>
+          </div>
+          <div class="options-grid grid-cols-3">
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="Android 9 (Pie)" required>
+              <span class="option-label">Android 9 <span class="option-sub">Pie</span></span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="Android 10 (Q)">
+              <span class="option-label">Android 10 <span class="option-sub">Q</span></span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="Android 11 (Red Velvet Cake)">
+              <span class="option-label">Android 11 <span class="option-sub">Red Velvet Cake</span></span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="Android 12 (Snow Cone)">
+              <span class="option-label">Android 12 <span class="option-sub">Snow Cone</span></span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="Android 13 / 14">
+              <span class="option-label">Android 13 / 14</span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.2146099017" value="__other_option__" id="android-other-radio">
+              <span class="option-label">Other</span>
+            </label>
+          </div>
+          <div id="android-other-wrap" class="other-detail-box">
+            <input
+              id="android_version_other"
+              class="input-text"
+              type="text"
+              name="entry.2146099017.other_option_response"
+              placeholder="Specify your OS version / fork (e.g. FireOS 7, LineageOS 20)..."
+              autocomplete="off"
+            >
+          </div>
+        </div>
+
+        <!-- 3. D-Pad Navigation Responsiveness -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label">
+              3. Did remote D-pad navigation feel smooth and responsive? <span class="required-mark">*</span>
+            </label>
+          </div>
+          <div class="options-grid">
+            <label class="option-tile">
+              <input type="radio" name="entry.555080363" value="Yes, buttery 60 fps" required>
+              <span class="option-label">Yes, buttery 60 fps</span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.555080363" value="Noticeable lag">
+              <span class="option-label">Noticeable lag</span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.555080363" value="Focus got lost">
+              <span class="option-label">Focus got lost</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 4. HDMI Inputs & TV Apps -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label">
+              4. Did your HDMI inputs and TV apps appear correctly? <span class="required-mark">*</span>
+            </label>
+          </div>
+          <div class="options-grid grid-cols-3">
+            <label class="option-tile">
+              <input type="radio" name="entry.1715080915" value="Yes, all accounted for" required>
+              <span class="option-label">Yes, all accounted for</span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.1715080915" value="Some missing">
+              <span class="option-label">Some missing</span>
+            </label>
+            <label class="option-tile">
+              <input type="radio" name="entry.1715080915" value="N/A (Streaming stick / Box without TV tuner or HDMI inputs)">
+              <span class="option-label">N/A <span class="option-sub">Stick/Box without inputs</span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Bugs or Suggestions -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label" for="bugs_feedback">
+              5. Bugs or Suggestions?
+            </label>
+            <span class="field-hint">Any visual glitches, sound hitches, crashes, or feature suggestions</span>
+          </div>
+          <textarea
+            id="bugs_feedback"
+            class="input-textarea"
+            name="entry.1690683356"
+            placeholder="Share your thoughts or describe what happened..."
+          ></textarea>
+        </div>
+
+        <!-- 6. (Optional) Gmail Address -->
+        <div class="form-group">
+          <div class="field-header">
+            <label class="field-label" for="gmail_address">
+              6. (Optional) Gmail Address
+            </label>
+            <span class="field-hint">Enter if you'd like an invite to the official Google Play Store Closed Beta track.</span>
+          </div>
+          <input
+            id="gmail_address"
+            class="input-text"
+            type="email"
+            name="entry.1779360007"
+            placeholder="your.email@gmail.com"
+            autocomplete="email"
+          >
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-container">
+          <button id="btn-submit" type="submit" class="btn-submit">
+            <span class="spinner" id="submit-spinner"></span>
+            <span id="btn-label">Submit Compatibility Report</span>
+          </button>
+          <p class="submit-note">Thank you for helping us optimize GALVis for every living room display.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Success Confirmation View -->
+    <div id="success-view" class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>Report Received!</h2>
+      <p>Thank you for testing GALVis TV Launcher. Your device compatibility data helps us polish the launcher experience across Android TV ecosystems.</p>
+      <button type="button" class="btn-reset" id="btn-reset">Submit Another Report</button>
+    </div>
+  </main>
+
+  <!-- Hidden iframe handles the POST target so the page never reloads -->
+  <iframe name="hidden_iframe" id="hidden_iframe"></iframe>
+
+  <script>
+    const form = document.getElementById("beta-form");
+    const formContent = document.getElementById("form-content");
+    const successView = document.getElementById("success-view");
+    const btnSubmit = document.getElementById("btn-submit");
+    const btnLabel = document.getElementById("btn-label");
+    const submitSpinner = document.getElementById("submit-spinner");
+    const btnReset = document.getElementById("btn-reset");
+    const otherRadio = document.getElementById("android-other-radio");
+    const otherWrap = document.getElementById("android-other-wrap");
+    const otherInput = document.getElementById("android_version_other");
+
+    // Toggle "Other" text input for Android version
+    const androidRadios = document.querySelectorAll('input[name="entry.2146099017"]');
+    androidRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (otherRadio.checked) {
+          otherWrap.classList.add("show");
+          otherInput.focus();
+        } else {
+          otherWrap.classList.remove("show");
+          otherInput.value = "";
+        }
+      });
+    });
+
+    // Form Submission Handling
+    let submittedToIframe = false;
+
+    form.addEventListener("submit", (e) => {
+      // Validate required fields
+      const deviceModel = document.getElementById("device_model");
+      const androidVer = form.querySelector('input[name="entry.2146099017"]:checked');
+      const dpad = form.querySelector('input[name="entry.555080363"]:checked');
+      const hdmi = form.querySelector('input[name="entry.1715080915"]:checked');
+      const gmail = document.getElementById("gmail_address");
+
+      if (!deviceModel.value.trim()) {
+        alert("Please specify your TV / Device Brand & Model.");
+        deviceModel.focus();
+        e.preventDefault();
+        return;
+      }
+
+      if (!androidVer) {
+        alert("Please select your Android Version.");
+        e.preventDefault();
+        return;
+      }
+
+      if (androidVer.value === "__other_option__" && !otherInput.value.trim()) {
+        alert("Please specify your other Android version / OS.");
+        otherInput.focus();
+        e.preventDefault();
+        return;
+      }
+
+      if (!dpad) {
+        alert("Please answer whether remote D-pad navigation felt smooth and responsive.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!hdmi) {
+        alert("Please answer whether HDMI inputs and TV apps appeared correctly.");
+        e.preventDefault();
+        return;
+      }
+
+      if (gmail.value.trim() && !gmail.checkValidity()) {
+        alert("Please enter a valid Gmail / email address or leave it blank.");
+        gmail.focus();
+        e.preventDefault();
+        return;
+      }
+
+      // Show submitting state
+      btnSubmit.disabled = true;
+      submitSpinner.style.display = "inline-block";
+      btnLabel.textContent = "Submitting...";
+
+      submittedToIframe = true;
+
+      // Fallback timer: in case iframe cross-origin policy suppresses onload event
+      setTimeout(() => {
+        if (submittedToIframe) {
+          submittedToIframe = false;
+          showSuccess();
+        }
+      }, 1200);
+    });
+
+    // When hidden iframe finishes loading after POST
+    document.getElementById("hidden_iframe").addEventListener("load", () => {
+      if (submittedToIframe) {
+        submittedToIframe = false;
+        showSuccess();
+      }
+    });
+
+    function showSuccess() {
+      btnSubmit.disabled = false;
+      submitSpinner.style.display = "none";
+      btnLabel.textContent = "Submit Compatibility Report";
+      formContent.style.display = "none";
+      successView.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Reset button to submit another response
+    btnReset.addEventListener("click", () => {
+      form.reset();
+      otherWrap.classList.remove("show");
+      successView.style.display = "none";
+      formContent.style.display = "block";
+    });
+  </script>
+</body>
+</html>
