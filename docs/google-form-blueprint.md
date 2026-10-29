@@ -112,73 +112,79 @@ Instead of creating the form manually click-by-click, you can run this Google Ap
 
 ```javascript
 function createGalvisBetaForm() {
-  const form = FormApp.create('GALVis™ TV Launcher — Beta Tester Compatibility Form');
+  var form = FormApp.create('GALVis TV Launcher - Beta Tester Compatibility Form');
   
   form.setDescription('Help us test GALVis across as many TV brands as possible. Takes less than 2 minutes.');
   form.setAllowResponseEdits(true);
   form.setLimitOneResponsePerUser(false);
-  form.setConfirmationMessage(
-    "Thank you for helping test GALVis™ TV Launcher! Your hardware telemetry helps us optimize performance across diverse TV chipsets.\n\n" +
-    "If you provided a Gmail address, you'll receive a Google Play Closed Testing invitation link shortly.\n\n" +
-    "GitHub Repository & Release Notes: https://github.com/galvis/galvis"
-  );
 
-  // 1. TV / Device Brand & Model
-  const item1 = form.addTextItem();
-  item1.setTitle('TV / Device Brand & Model')
-       .setHelpText('e.g., Sony Bravia X90J, TCL 55C635, Chromecast with Google TV 4K, Nvidia Shield TV Pro, Xiaomi TV Box S')
-       .setRequired(true);
+  var confirmationMessage = [
+    'Thank you for helping test GALVis TV Launcher!',
+    'Your hardware telemetry helps us optimize performance across diverse TV chipsets.',
+    '',
+    'If you provided a Gmail address, you will receive a Google Play Closed Testing invitation link shortly.',
+    '',
+    'GitHub Repository: https://github.com/galvis/galvis'
+  ].join('\n');
+
+  form.setConfirmationMessage(confirmationMessage);
+
+  // 1. Device Brand & Model
+  form.addTextItem()
+      .setTitle('TV / Device Brand & Model')
+      .setHelpText('e.g., Sony Bravia X90J, TCL 55C635, Chromecast with Google TV 4K, Nvidia Shield TV Pro, Xiaomi TV Box S')
+      .setRequired(true);
 
   // 2. Android Version
-  const item2 = form.addMultipleChoiceItem();
-  item2.setTitle('Android Version')
-       .setChoiceValues([
-         'Android 9 (Pie)',
-         'Android 10 (Q)',
-         'Android 11 (Red Velvet Cake)',
-         'Android 12 (Snow Cone)',
-         'Android 13 / 14'
-       ])
-       .showOtherOption(true)
-       .setRequired(true);
+  form.addMultipleChoiceItem()
+      .setTitle('Android Version')
+      .setChoiceValues([
+        'Android 9 (Pie)',
+        'Android 10 (Q)',
+        'Android 11 (Red Velvet Cake)',
+        'Android 12 (Snow Cone)',
+        'Android 13 / 14'
+      ])
+      .showOtherOption(true)
+      .setRequired(true);
 
-  // 3. Remote D-pad navigation responsiveness
-  const item3 = form.addMultipleChoiceItem();
-  item3.setTitle('Did remote D-pad navigation feel smooth and responsive?')
-       .setChoiceValues([
-         'Yes, buttery 60 fps',
-         'Noticeable lag',
-         'Focus got lost'
-       ])
-       .setRequired(true);
+  // 3. Fluidity
+  form.addMultipleChoiceItem()
+      .setTitle('Did remote D-pad navigation feel smooth and responsive?')
+      .setChoiceValues([
+        'Yes, buttery 60 fps',
+        'Noticeable lag',
+        'Focus got lost'
+      ])
+      .setRequired(true);
 
-  // 4. HDMI inputs and TV apps appearance
-  const item4 = form.addMultipleChoiceItem();
-  item4.setTitle('Did your HDMI inputs and TV apps appear correctly?')
-       .setChoiceValues([
-         'Yes, all accounted for',
-         'Some missing',
-         'N/A (Streaming stick / Box without TV tuner or HDMI inputs)'
-       ])
-       .setRequired(true);
+  // 4. Inputs & Apps Visibility
+  form.addMultipleChoiceItem()
+      .setTitle('Did your HDMI inputs and TV apps appear correctly?')
+      .setChoiceValues([
+        'Yes, all accounted for',
+        'Some missing',
+        'N/A (Streaming stick / Box without TV tuner or HDMI inputs)'
+      ])
+      .setRequired(true);
 
-  // 5. Bugs or Suggestions?
-  const item5 = form.addParagraphTextItem();
-  item5.setTitle('Bugs or Suggestions?')
-       .setHelpText('Describe any visual glitches, crashes, audio drops, remote button quirks, or wishlist items.')
-       .setRequired(false);
+  // 5. Bugs / Suggestions
+  form.addParagraphTextItem()
+      .setTitle('Bugs or Suggestions?')
+      .setHelpText('Describe any visual glitches, crashes, audio drops, remote button quirks, or wishlist items.')
+      .setRequired(false);
 
-  // 6. (Optional) Gmail Address
-  const item6 = form.addTextItem();
-  const emailValidation = FormApp.createTextValidation()
-    .requireTextContains('@')
-    .setHelpText('Please enter a valid email address if you wish to receive an invite.')
-    .build();
+  // 6. Gmail Address
+  var emailValidation = FormApp.createTextValidation()
+      .requireTextContains('@')
+      .setHelpText('Please enter a valid email address.')
+      .build();
 
-  item6.setTitle('(Optional) Gmail Address')
-       .setHelpText("Enter if you'd like an invite to the official Google Play Store Closed Beta track (requires a Google account).")
-       .setValidation(emailValidation)
-       .setRequired(false);
+  form.addTextItem()
+      .setTitle('(Optional) Gmail Address')
+      .setHelpText('Enter if you would like an invite to the official Google Play Store Closed Beta track (requires a Google account).')
+      .setValidation(emailValidation)
+      .setRequired(false);
 
   Logger.log('Form created successfully!');
   Logger.log('Edit URL: ' + form.getEditUrl());
