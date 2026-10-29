@@ -176,7 +176,7 @@ function createGalvisBetaForm() {
 
   // 6. Gmail Address
   var emailValidation = FormApp.createTextValidation()
-      .requireTextContains('@')
+      .requireTextIsEmail()
       .setHelpText('Please enter a valid email address.')
       .build();
 
