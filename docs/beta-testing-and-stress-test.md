@@ -51,6 +51,9 @@ Run duration: **2026-10-24 19:04 to 2026-10-26 19:04**
 3. **Public Positioning (XDA / Reddit / GitHub)**:
    - Pitch: *"All the speed of debloating without the risk of breaking your TV."*
    - Anti-Copycat Differentiators vs Projectivy:
-     - 100% Free & Open Source (GPLv3) — zero paywalls or paid wallpaper packs.
+     - 100% Free & Open Source (MIT) — zero paywalls or paid wallpaper packs.
      - Apple tvOS glass aesthetic & fluid spring physics.
      - Ultra-low memory (<25 MB idle Java/Native baseline), instant cold start.
+4. **Community Feedback Intake Channels**:
+   - **GitHub Users**: Pre-populated QR code on TV via `ReportIssueDialog` or [GitHub Issue Templates](../.github/ISSUE_TEMPLATE/).
+   - **Forum / Reddit Testers (No GitHub account)**: [Google Form Blueprint](google-form-blueprint.md) (2-minute triage form with automated Google Apps Script).
