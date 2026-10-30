@@ -1,7 +1,10 @@
 # GALVis™ TV Launcher
 
 <p align="center">
-  <img src="docs/marketing/logo-1.png" alt="GALVis TV Logo" width="360" />
+  <img src="docs/marketing/logo-1.png" alt="GALVis TV Logo" width="360" /><br/>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPLv3" /></a>
+  <a href="https://github.com/bluviper/galvis/releases"><img src="https://img.shields.io/badge/Release-v1.1.0--beta-success.svg" alt="Release: v1.1.0-beta" /></a>
+  <a href="https://buymeacoffee.com/bluviper"><img src="https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-orange.svg" alt="Buy Me A Coffee" /></a>
 </p>
 
 **GALVis™** is an ultra-minimalist, high-performance Android TV & Google TV launcher that eliminates sponsored rows, recommendation feeds, and vendor bloat while preserving smooth 60 fps remote navigation. Built on a rock-solid, zero-bloat foundation with a compiled footprint of just **474 KB**, GALVis™ is engineered specifically for memory-conscious televisions such as the **TCL 55C635** (2 GB RAM, Cortex-A55).
@@ -151,3 +154,29 @@ adb -s emulator-5554 shell am start -n com.galvis.launcher.debug/com.galvis.laun
   - Inside the Inputs menu: Tunes the selected HDMI port / Live TV.
 - **LONG_CLICK (Hold OK)**: Pins or unpins an application from the Favorites dock band.
 - **BACK**: Dismisses active flyout menus, or returns focus directly to the Favorites dock.
+
+---
+
+## License & Attributions
+
+GALVis™ is 100% Free & Open Source Software released under the **[GNU General Public License v3.0 (GPLv3)](LICENSE)**.
+
+```text
+GALVis™ TV Launcher
+Copyright (C) 2026 GALVis Contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+```
+
+### Third-Party Component Licenses
+
+1. **Underlying TV Engine Components**:
+   - Portions copyright © 2026 Gathin and CleanYourTV contributors.
+   - Licensed under the **[MIT License](LICENSE#L654)**.
+2. **Outfit Typeface**:
+   - The Outfit typeface in `app/src/main/res/font/outfit.ttf` is copyright The Outfit Project Authors.
+   - Licensed under the **[SIL Open Font License 1.1](LICENSE#L666)**.
+
