@@ -3,8 +3,10 @@ package com.galvis.tvhome;
 import android.accessibilityservice.AccessibilityService;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.Toast;
 import java.util.Collections;
 import java.util.Map;
 
@@ -21,6 +23,9 @@ public class InputKeyService extends AccessibilityService {
     private static final String ACTION_VIEW_INPUTS = "com.android.tv.action.VIEW_INPUTS";
 
     private int[] inputKeycodes = new int[0];
+    private int[] settingsScancodes = new int[0];
+    private int[] settingsKeycodes = new int[0];
+    private boolean settingsPanel;
     private Map<Integer, String> appKeys = Collections.emptyMap();
     private Map<Integer, String> appScancodes = Collections.emptyMap();
     private Map<Integer, String> holdAppKeys = Collections.emptyMap();
@@ -31,17 +36,27 @@ public class InputKeyService extends AccessibilityService {
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
+        settingsScancodes = getResources().getIntArray(R.array.settings_key_scancodes);
         // From config.xml or a theme's config.json; theme.sh rebinds this service after a push.
         Config config = Config.load(this);
         // restore_key_services: note that this helper runs, so Home can put it back after a force stop.
         repairRecord = config.restoreKeyServices;
         if (repairRecord) ServiceRepair.connected(this, getClass());
         inputKeycodes = config.inputKeycodes;
+        settingsKeycodes = config.settingsKeycodes;
+        settingsPanel = config.settingsKeyPanel;
         appKeys = RemoteKeys.parseAppKeys(config.appKeys);
         appScancodes = RemoteKeys.parseAppScancodes(config.appKeys);
         RemoteKeys.applyKeyFilter(this, config.keyFilter);
         holdAppKeys = RemoteKeys.parseHoldAppKeys(config.appKeys);
         holdAppScancodes = RemoteKeys.parseHoldAppScancodes(config.appKeys);
+    }
+
+    private boolean isSettingsKey(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_SETTINGS) return true;
+        for (int code : settingsScancodes) if (event.getScanCode() == code) return true;
+        for (int code : settingsKeycodes) if (event.getKeyCode() == code) return true;
+        return false;
     }
 
     private boolean isInputKey(int keyCode) {
@@ -55,6 +70,18 @@ public class InputKeyService extends AccessibilityService {
         // A scancode entry is more specific than any keycode, so it goes first.
         if (RemoteKeys.handle(this, event, appScancodes.get(event.getScanCode()),
                 holdAppScancodes.get(event.getScanCode()))) return true;
+        if (isSettingsKey(event)) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent open = settingsPanel ? new Intent(this, QuickSettingsActivity.class)
+                        : SystemSettings.intent(this, Settings.ACTION_SETTINGS);
+                try {
+                    startActivity(open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } catch (ActivityNotFoundException | SecurityException unavailable) {
+                    Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
+                }
+            }
+            return true;
+        }
         if (RemoteKeys.handle(this, event, appKeys.get(event.getKeyCode()),
                 holdAppKeys.get(event.getKeyCode()))) return true;
         if (!isInputKey(event.getKeyCode())) return false;

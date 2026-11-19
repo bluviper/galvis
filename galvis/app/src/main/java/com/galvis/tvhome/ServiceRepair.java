@@ -10,6 +10,7 @@ import android.provider.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Android takes an app's accessibility services off the enabled list when the app is force-stopped (Settings, a
@@ -37,6 +38,8 @@ final class ServiceRepair {
         if (context.checkSelfPermission(Manifest.permission.WRITE_SECURE_SETTINGS)
                 != PackageManager.PERMISSION_GRANTED) return;
         try {
+            Map<String, ?> recorded = prefs(context).getAll();
+            if (recorded.isEmpty()) return;
             ContentResolver cr = context.getContentResolver();
             String list = Settings.Secure.getString(cr, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
             List<ComponentName> enabled = new ArrayList<>();
@@ -48,16 +51,19 @@ final class ServiceRepair {
             }
             StringBuilder updated = new StringBuilder(list == null || list.equals("null") ? "" : list);
             boolean missing = false;
-            for (String service : prefs(context).getAll().keySet()) {
+            for (String service : recorded.keySet()) {
                 ComponentName name = new ComponentName(context.getPackageName(), service);
                 if (enabled.contains(name)) continue;
                 if (updated.length() > 0) updated.append(':');
                 updated.append(name.flattenToShortString());
                 missing = true;
             }
-            if (!missing) return;
-            Settings.Secure.putString(cr, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, updated.toString());
-            Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+            if (missing) {
+                Settings.Secure.putString(cr, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, updated.toString());
+            }
+            if (missing || Settings.Secure.getInt(cr, Settings.Secure.ACCESSIBILITY_ENABLED, 0) != 1) {
+                Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+            }
         } catch (RuntimeException ignored) {
             // The setting is the system's; a refusal leaves the helper off, as before.
         }
