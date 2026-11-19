@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.1.0] - 2026-10-28
+## [1.1.0] - 2026-11-20
 
 ### Added
+- **TCL Hardware Remote Shortcuts & Global In-App Settings Key Interception (`InputKeyService`, `ServiceRepair`, `config.xml`)**:
+  - Mapped TCL remote shortcut keycodes (`4062` Netflix, `4065` YouTube, `4099` Prime Video) and Settings keycodes (`83`, `4020`, `4077`) in `config.xml`.
+  - Added global Settings keycode and scancode interception directly inside `InputKeyService` so pressing the physical Settings button inside third-party apps (YouTube, Netflix) opens the native translucent Android TV Settings side-sheet on top of active playback instead of falling through to TCL's recovery error screen.
+  - Enabled `restore_key_services` and hardened `ServiceRepair.restore()` to re-assert `ACCESSIBILITY_ENABLED = 1` across APK updates and reboots.
+- **In-Launcher Idle Clock Morph Animation & Wallpaper Diffuser (`IdleClockOverlay`, `ClockScene`, `MainActivity`, `WallpaperPlayer`)**:
+  - Added `IdleClockOverlay` to smoothly scale and drift the Home screen header clock into the ambient screensaver after 9 minutes of idle time, dismissing instantly on any remote press.
+  - Baked a vertical dark diffuser gradient (`25%` top to `75%` bottom) into decoded wallpapers once at load time to improve dock label legibility over bright backgrounds with zero per-frame GPU overdraw.
 - **Integrated Tester Issue Reporting & QR Telemetry Dialog (`ReportIssueDialog`)**:
   - Direct on-device modal for beta testers accessible across 3 key launcher menus:
     - **Launcher Settings**: Dedicated `reportIssueChoice` row under system settings.

@@ -8,6 +8,10 @@ We're thrilled to introduce the first public beta of **GALVis™ TV Launcher** (
 
 ## 🌟 Key Highlights
 
+### 🆕 Latest Beta Updates (Nov 2026)
+- **In-App Settings Side-Sheet & TCL Hardware Shortcuts (`1b4f515`, `adbf845`):** Physical Netflix (`4062`), YouTube (`4065`), Prime Video (`4099`), and Settings (`83`, `4020`, `4077`) remote buttons work globally across all apps. Pressing Settings inside YouTube or Netflix opens the native translucent Android TV Settings side-sheet without interrupting background video/audio playback (ideal for TCL's *Audio Only / Turn off screen* mode), with automatic `ServiceRepair` accessibility re-binding.
+- **Smooth Idle Clock Morph & Baked Wallpaper Diffuser (`290b196`):** In-launcher `IdleClockOverlay` scales and drifts smoothly from the top-left header clock after 9 minutes of idle time; baked vertical dark gradient diffuser (`25%` top -> `75%` bottom) keeps dock labels crisp with zero per-frame GPU overdraw.
+
 ### 🍎 tvOS-Inspired Glass Aesthetic
 - Frosted translucent dock band with hardware-accelerated ambient drop shadows
 - **Dynamic App Halo Glow:** extracts the dominant brand color of the focused app and casts a vibrant glow behind it
@@ -73,8 +77,8 @@ certutil -hashfile app-release.apk SHA256
 
 ## ⚠️ Known Issues
 
-- [Issue 1, e.g. behavior on a specific TV or Android version]
-- [Issue 2]
+- **Voice Assistant & RAM Trade-Off:** Disabling stock `launcherx` frees ~150–250 MB RAM on 2 GB TVs and preserves remote push-to-talk voice search (`TALK` button), while suspending continuous hands-free far-field bezel wake-word listening.
+- **Accessibility Key Service Persistence:** Force-stopping the launcher in Android Settings temporarily unbinds accessibility helpers until GALVis re-opens (`ServiceRepair` with `restore_key_services` automatically re-enables them on launch).
 - This is a **beta**. Please report problems via **Settings > Report an Issue** or the Issues tab.
 
 > **Privacy note:** The QR bug report pre-fills your TV's RAM, OS version, build fingerprint, and display specs into a public GitHub issue. Review the issue text before submitting.
@@ -89,12 +93,13 @@ certutil -hashfile app-release.apk SHA256
 | Target SDK | Android 14 (API 34) |
 | Min SDK | Android 8.0 (API 26) |
 | File Name | `app-release.apk` |
-| File Size | 3,125,089 bytes (~2.98 MB) |
-| SHA-256 | `9874C04F3D41052974ECA40E652E87BCF5B00EE6BA85157292B8B2F3A06ED0B7` |
-  ### ☕ Support & Community
+| File Size | 3,127,741 bytes (~2.98 MB) |
+| SHA-256 | `D5A4379D8B4FAAA6CD95798A611DA96DF1519EA41F4B40C9AE78EF89036921D3` |
 
-  GALVis is 100% Free & Open Source under the GPLv3 license. No ads, no tracking, and no paywalls.
+### ☕ Support & Community
 
-  • 🐛 Report a Bug: GitHub Issues https://github.com/bluviper/galvis/issues or scan the on-screen QR code on your TV.
-  • ✉️ Support Inquiries: galvis.launcher@gmail.com
-  • ☕ Support the Project: Buy Me a Coffee https://buymeacoffee.com/bluviper
+GALVis is 100% Free & Open Source under the GPLv3 license. No ads, no tracking, and no paywalls.
+
+• 🐛 Report a Bug: [GitHub Issues](https://github.com/bluviper/galvis/issues) or scan the on-screen QR code on your TV.
+• ✉️ Support Inquiries: galvis.launcher@gmail.com
+• ☕ Support the Project: [Buy Me a Coffee](https://buymeacoffee.com/bluviper)

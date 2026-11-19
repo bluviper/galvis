@@ -85,6 +85,27 @@ Trailers auto-play, rows of "recommendations" clutter your home screen, and navi
 
 Tired of closed-source alternatives with locked paywalls, I built **GALVis™** — an ultra-minimalist, high-performance, 100% Free & Open Source (GPLv3) launcher designed to liberate your TV.
 
+[TABLE]
+[TR]
+[TD]
+[B][SIZE=5][COLOR=DeepSkyBlue]📢 UPDATES & CHANGELOG[/COLOR][/SIZE][/B]
+[I]Latest fixes and improvements committed since the initial v1.1.0-beta launch post:[/I]
+
+• [B]Nov 20, 2026[/B] — Commit [URL='https://github.com/bluviper/galvis/commit/290b196'][B][ICODE]290b196[/ICODE][/B][/URL] ([I]Idle Clock Morph Animation, Wallpaper Diffuser & Voice/RAM Docs[/I])
+[B]Problem Solved:[/B] Eliminated abrupt black-screen cuts when the Home screen enters idle clock mode by adding an in-launcher [ICODE]IdleClockOverlay[/ICODE] that smoothly scales and drifts directly from the top-left header clock (and dismisses instantly on any key press). Also baked a vertical dark diffuser gradient into wallpapers once at decode time so dock labels stay crisp over bright backgrounds with zero per-frame GPU overdraw, and documented how keeping [ICODE]launcherx[/ICODE] disabled saves ~150–250 MB RAM while preserving remote push-to-talk voice search.
+
+• [B]Nov 20, 2026[/B] — Commit [URL='https://github.com/bluviper/galvis/commit/1b4f515'][B][ICODE]1b4f515[/ICODE][/B][/URL] ([I]In-App Settings Key Interception & Accessibility Self-Repair[/I])
+[B]Problem Solved:[/B] Fixed an issue where pressing the physical [B]Settings (Gear)[/B] button while inside streaming apps (YouTube, Netflix) was ignored by [ICODE]InputKeyService[/ICODE] and fell through to TCL's window manager, triggering a false system recovery warning screen. Pressing Settings inside YouTube or Netflix now opens the native translucent Android TV Settings side-sheet right over the active app while your video and audio continue playing in the background (ideal for toggling TCL's [I]Audio Only / Screen Off[/I] mode on YouTube music videos). Also hardened [ICODE]ServiceRepair[/ICODE] so the key helper automatically re-enables itself across APK updates or reboots.
+
+• [B]Nov 2, 2026[/B] — Commit [URL='https://github.com/bluviper/galvis/commit/adbf845'][B][ICODE]adbf845[/ICODE][/B][/URL] ([I]TCL Hardware Remote Shortcut & Settings Keycode Mapping[/I])
+[B]Problem Solved:[/B] Restored dedicated physical remote shortcut buttons ([B]Netflix[/B] [ICODE]4062[/ICODE], [B]YouTube[/B] [ICODE]4065[/ICODE], [B]Prime Video[/B] [ICODE]4099[/ICODE], and [B]Settings/Quick Menu[/B] [ICODE]83[/ICODE]/[ICODE]4020[/ICODE]/[ICODE]4077[/ICODE]) that stopped responding once the stock Google TV launcher ([ICODE]launcherx[/ICODE]) was disabled.
+
+• [B]Oct 30, 2026[/B] — Commits [URL='https://github.com/bluviper/galvis/commit/86173a2'][B][ICODE]86173a2[/ICODE][/B][/URL], [URL='https://github.com/bluviper/galvis/commit/0622951'][B][ICODE]0622951[/ICODE][/B][/URL], [URL='https://github.com/bluviper/galvis/commit/080d9bb'][B][ICODE]080d9bb[/ICODE][/B][/URL], [URL='https://github.com/bluviper/galvis/commit/6264d70'][B][ICODE]6264d70[/ICODE][/B][/URL] ([I]Release Notes, Sideload Guides & Open-Source Licensing[/I])
+[B]Problem Solved:[/B] Added multi-tier sideloading instructions for beginners and advanced ADB users, published the Google Play privacy policy, and added root license and attribution documentation.
+[/TD]
+[/TR]
+[/TABLE]
+
 ---
 
 [B][SIZE=5]✦ Key Features[/SIZE][/B]
