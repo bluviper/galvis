@@ -116,9 +116,21 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private String liveTvPkg;
     /** Launcher settings' change count this Home was built with (see onResume). */
     private long settingsRevision;
-    /** Idle time on Home before ClockActivity; 0 is off (config.xml, home_idle_clock_minutes). */
+    /** Idle time on Home before the in-launcher clock screensaver; 0 is off (config.xml). */
     private long idleClockMs;
-    private final Runnable showIdleClock = () -> startActivity(new Intent(this, ClockActivity.class));
+    private IdleClockOverlay idleClockOverlay;
+    private View clockView;
+    private final Runnable showIdleClock = this::triggerIdleClock;
+
+    private void triggerIdleClock() {
+        if (openPopup != null || cardPrompt != null || reordering) {
+            restartIdleClock();
+            return;
+        }
+        if (idleClockOverlay != null) {
+            idleClockOverlay.show(clockView, clockBlock);
+        }
+    }
     private String liveTvAction;
     private String liveTvInputId;
     /** The app library is on (config.xml, app_library): only then can the tile menu take an app off Home. */
@@ -376,7 +388,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         festival = cfg.festival;
         festive = festival.active(LocalDate.now());
         liveTvPkg = cfg.liveTvPackage;
-        idleClockMs = cfg.homeIdleClockMinutes * MINUTE_MS;
+        idleClockMs = cfg.homeIdleClockMinutes > 0
+                ? cfg.homeIdleClockMinutes * MINUTE_MS
+                : getResources().getInteger(R.integer.home_idle_clock_seconds) * 1_000L;
         bootToLiveTv = cfg.bootToLiveTv;
         liveTvAction = cfg.liveTvAction;
         liveTvInputId = cfg.liveTvInputId;
@@ -426,6 +440,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (!cfg.dockTitle) hero.setVisibility(View.GONE);
         greeting = findViewById(R.id.greeting);
         clockBlock = findViewById(R.id.leftBlock);
+        clockView = findViewById(R.id.clock);
+        idleClockOverlay = new IdleClockOverlay((FrameLayout) root);
         greetingColor = greeting.getCurrentTextColor();
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Center Hebrew greetings over the numeric time, independent of a visible AM/PM label.
@@ -791,6 +807,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (openLauncherSettingsIfAsked(intent)) return;
         if (openInputsIfAsked(intent)) return;
         if (intent == null || !intent.hasCategory(Intent.CATEGORY_HOME)) return;
+        if (idleClockOverlay != null && idleClockOverlay.isActive()) {
+            idleClockOverlay.dismiss(this::restartIdleClock);
+        }
         grid.scrollToPosition(0);
         lastFocused = 0;
         lastFocusedKey = adapter.getItemCount() > 0 ? adapter.keyAt(0) : null;
@@ -833,6 +852,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             return;
         }
         restartIdleClock();
+        if (idleClockOverlay != null && idleClockOverlay.isActive()) {
+            idleClockOverlay.dismiss(this::restartIdleClock);
+        }
         promptsPaused = false;
         if (grid.getAdapter() == null) grid.setAdapter(adapter);   // dropped by onTrimMemory
         switch (tileRefresh.onResume(packagesChangedSinceRebuild())) {
@@ -1051,6 +1073,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     @Override
     protected void onStop() {
         super.onStop();
+        if (idleClockOverlay != null) idleClockOverlay.hideImmediate();
         started = false;
         unregisterReceiver(timeReceiver);
         handler.removeCallbacks(clockCheck);
@@ -1128,6 +1151,26 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     /** Blue the glass turns while reorder mode is on. */
     private static final int REORDER_ACCENT = 0xFF6EC1FF;
 
+    @Override
+    public boolean dispatchTouchEvent(android.view.MotionEvent event) {
+        if (idleClockOverlay != null && idleClockOverlay.isActive()) {
+            if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+                idleClockOverlay.dismiss(this::restartIdleClock);
+            }
+            return true;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public boolean dispatchGenericMotionEvent(android.view.MotionEvent event) {
+        if (idleClockOverlay != null && idleClockOverlay.isActive()) {
+            idleClockOverlay.dismiss(this::restartIdleClock);
+            return true;
+        }
+        return super.dispatchGenericMotionEvent(event);
+    }
+
     /**
      * Reorder mode (top-bar button). While it is on, every key comes here first:
      * - nothing carried: arrows move focus as usual; OK on a tile picks it up instead of opening the app;
@@ -1137,6 +1180,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (idleClockOverlay != null && idleClockOverlay.isActive()) {
+            if (event.getAction() == KeyEvent.ACTION_UP) {
+                idleClockOverlay.dismiss(this::restartIdleClock);
+            }
+            return true;
+        }
         if (handleSettingsKey(event)) return true;
         if (tileMenuEnabled && !reordering && openPopup == null && cardPrompt == null
                 && event.getKeyCode() == KeyEvent.KEYCODE_MENU) {

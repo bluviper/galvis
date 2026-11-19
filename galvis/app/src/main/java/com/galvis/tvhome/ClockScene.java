@@ -61,6 +61,13 @@ final class ClockScene {
         handler.postDelayed(tick, MOVE_MS);
     }
 
+    /** Starts the drift and colour-shift timer after an external transition has already placed content. */
+    void startAfterTransition() {
+        centerGlowBehindContent();
+        handler.removeCallbacks(tick);
+        handler.postDelayed(tick, MOVE_MS);
+    }
+
     void stop() {
         handler.removeCallbacksAndMessages(null);   // the tick and any glow steps still queued
         content.animate().cancel();
@@ -82,9 +89,14 @@ final class ClockScene {
         float y = maxY * (0.1f + 0.8f * random.nextFloat());
         content.setX(x);
         content.setY(y);
-        if (parent.getWidth() > 0 && parent.getHeight() > 0) {
-            glow.setGradientCenter((x + content.getWidth() / 2f) / parent.getWidth(),
-                    (y + content.getHeight() / 2f) / parent.getHeight());
+        centerGlowBehindContent();
+    }
+
+    private void centerGlowBehindContent() {
+        View parent = (View) content.getParent();
+        if (parent != null && parent.getWidth() > 0 && parent.getHeight() > 0) {
+            glow.setGradientCenter((content.getX() + content.getWidth() / 2f) / parent.getWidth(),
+                    (content.getY() + content.getHeight() / 2f) / parent.getHeight());
         }
     }
 

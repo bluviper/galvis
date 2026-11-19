@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -303,10 +306,18 @@ final class WallpaperPlayer {
                 options.inTargetDensity = scale[1];
             }
             options.inPreferredConfig = bitmapConfig;
-            options.inMutable = dimColor != 0;
+            options.inMutable = true;
             Bitmap decoded = BitmapFactory.decodeFile(file.getPath(), options);
             if (decoded == null) return null;
-            if (dimColor != 0) new Canvas(decoded).drawColor(dimColor);
+            Canvas canvas = new Canvas(decoded);
+            if (dimColor != 0) canvas.drawColor(dimColor);
+            // Vertical dark diffuser (25% top -> 75% bottom) baked once at decode to suppress bright wallpapers
+            // and keep the dock/labels readable without per-frame full-screen overdraw.
+            Paint diffuser = new Paint();
+            diffuser.setShader(new LinearGradient(
+                    0f, 0f, 0f, decoded.getHeight(),
+                    0x40000000, 0xBF000000, Shader.TileMode.CLAMP));
+            canvas.drawRect(0f, 0f, decoded.getWidth(), decoded.getHeight(), diffuser);
             // One copy in GPU memory instead of a software bitmap plus its texture; the decode stays off the UI
             // thread for rotations, and Home's return no longer uploads 4-8 MB to the GPU.
             Bitmap gpu = decoded.copy(Bitmap.Config.HARDWARE, false);

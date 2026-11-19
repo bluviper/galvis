@@ -21,6 +21,7 @@
 ### Verified Hardware Behaviors:
 - **Widevine L1 DRM Intact**: Netflix and Amazon Prime stream in full 4K HDR without handshake failure or fallback to SD.
 - **Google Cast Working**: Disabling `launcherx` did not break `com.google.android.apps.mediashell`.
+- **Voice Control & Assistant**: Push-to-talk via the remote control's mic button remains fully functional (`com.google.android.katniss` intact). Hands-free far-field bezel "Hey Google" listening is disabled with `launcherx`, saving ~150–250 MB RAM and stopping continuous background audio processing.
 - **Zero Background I/O Thrashing**: Wallpaper rotation halts during video playback and resumes on return.
 - **Deterministic Focus Anchor**: Returning Home predictably focuses Slot 0 (Favorite Card 1) in the Fav Bar, eliminating 10-foot disorientation.
 

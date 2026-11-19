@@ -138,6 +138,7 @@ Open GALVis from your current app drawer. Verify that remote navigation, your in
 • [I]Non-destructive testing (Recommended for Beta)[/I]: Use an app like [I]Button Mapper[/I] or [I]Launch on Boot[/I] to remap your remote's Home button to GALVis.
 • [I]Full Debloat (Advanced/ADB)[/I]: Disable the stock Google TV launcher via ADB:
 [CODE]adb shell cmd package set-home-activity com.galvis.tvhome/.MainActivity[/CODE]
+[I]Note on Voice & RAM[/I]: Disabling [ICODE]launcherx[/ICODE] saves ~150–250 MB RAM on 2 GB TVs. The remote's physical mic/talk button continues to work normally for voice searches, while continuous hands-free "Hey Google" ambient listening on the TV bezel mic is disabled.
 (To revert at any time, see the rollback guide below).
 
 ---

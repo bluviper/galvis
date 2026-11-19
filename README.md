@@ -141,6 +141,13 @@ adb -s emulator-5554 shell am start -n com.galvis.launcher.debug/com.galvis.laun
    adb -s 192.168.31.124:5555 shell am start -n com.galvis.launcher.debug/com.galvis.launcher.MainActivity
    ```
 
+### 3. Voice Assistant & RAM Optimization Trade-Off
+
+When replacing the stock Google TV launcher by disabling `launcherx` and `setupwraith` (`pm disable-user`):
+- **Substantial RAM Savings**: Frees ~150–250 MB of RAM on memory-constrained 2 GB televisions (e.g. TCL 55C635) and eliminates background Google TV ad/recommendation sync loops.
+- **Push-to-Talk Preserved**: The remote's physical **TALK / Mic** button continues to work normally for voice searches and commands (`com.google.android.katniss` and `com.google.android.tv.remote.service` remain enabled).
+- **Hands-Free Far-Field Mic Suspended**: Continuous ambient "Hey Google" wake-word listening on the TV bezel mic is disabled, as Google TV voice-match sessions require `launcherx`. This also provides a privacy benefit by eliminating always-on ambient room listening.
+
 ---
 
 ## Remote / D-Pad Navigation
